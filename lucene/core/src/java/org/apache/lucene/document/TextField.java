@@ -27,20 +27,24 @@ import org.apache.lucene.index.IndexOptions;
 public final class TextField extends Field {
 
   /** Indexed, tokenized, not stored. */
-  public static final FieldType TYPE_NOT_STORED = new FieldType();
+  public static final FieldType TYPE_NOT_STORED;
 
   /** Indexed, tokenized, stored. */
-  public static final FieldType TYPE_STORED = new FieldType();
+  public static final FieldType TYPE_STORED;
 
   static {
-    TYPE_NOT_STORED.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
-    TYPE_NOT_STORED.setTokenized(true);
-    TYPE_NOT_STORED.freeze();
+    FieldType typeNotStored = new FieldType();
+    typeNotStored.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
+    typeNotStored.setTokenized(true);
+    typeNotStored.freeze();
+    TYPE_NOT_STORED = typeNotStored;
 
-    TYPE_STORED.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
-    TYPE_STORED.setTokenized(true);
-    TYPE_STORED.setStored(true);
-    TYPE_STORED.freeze();
+    FieldType typeStored = new FieldType();
+    typeStored.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
+    typeStored.setTokenized(true);
+    typeStored.setStored(true);
+    typeStored.freeze();
+    TYPE_STORED = typeStored;aw
   }
 
   // TODO: add sugar for term vectors...?
